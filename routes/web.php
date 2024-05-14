@@ -6,6 +6,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/signin', function () {
-    return view('web.auth.signin');
+Route::prefix('auth')->group(function () {
+    Route::view('signin', 'web.auth.signin');
+    Route::view('signup', 'web.auth.signup');
 });
