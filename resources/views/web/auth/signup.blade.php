@@ -11,12 +11,12 @@
                 @csrf
                 @method('POST')
                 <div class="flex flex-col gap-2">
-                    <input type="text" placeholder="Fullname" name="fullname" class="w-96 px-4 py-2 border border-gray-300 rounded-md mb-4 shadow-md">
-                    <input type="text" placeholder="Username" name="username" class="w-96 px-4 py-2 border border-gray-300 rounded-md mb-4 shadow-md">
-                    <input type="email" placeholder="Email" name="email" class="w-96 px-4 py-2 border border-gray-300 rounded-md mb-4 shadow-md">
-                    <input type="text" placeholder="Phone Number" name="phone-number" class="w-96 px-4 py-2 border border-gray-300 rounded-md mb-4 shadow-md">
-                    <input type="password" placeholder="Password" name="password" class="w-96 px-4 py-2 border border-gray-300 rounded-md mb-4 shadow-md">
-                    <input type="password" placeholder="Re-enter password" name="re-password" class="w-96 px-4 py-2 border border-gray-300 rounded-md mb-4 shadow-md">
+                    <input type="text" placeholder="Fullname" name="fullname" class="w-96 px-4 py-2 border rounded-md mb-4 shadow-md outline-none">
+                    <input type="text" placeholder="Username" name="username" class="w-96 px-4 py-2 border  rounded-md mb-4 shadow-md outline-none">
+                    <input type="email" placeholder="Email" name="email" class="w-96 px-4 py-2 border  rounded-md mb-4 shadow-md outline-none">
+                    <input type="text" placeholder="Phone Number" name="phone-number" class="w-96 px-4 py-2 border  rounded-md mb-4 shadow-md outline-none">
+                    <input type="password" placeholder="Password" name="password" class="w-96 px-4 py-2 border  rounded-md mb-4 shadow-md outline-none">
+                    <input type="password" placeholder="Re-enter password" name="re-password" class="w-96 px-4 py-2 border  rounded-md mb-4 shadow-md outline-none">
                     <div class="flex flex-row justify-between mb-5 mt-4">
                         <button class="px-8 py-2 flex flex-row gap-5 rounded-md align-middle shadow-md hover:bg-gray-50">
                             <img src="{{ asset('assets/icons/google.png') }}" alt="Google" class="w-5 h-5">
