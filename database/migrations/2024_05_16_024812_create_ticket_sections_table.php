@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->unsignedInteger('quantity');
-            $table->decimal('price');
+            $table->decimal('price', 15, 0);
             $table->timestamps();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
         });
