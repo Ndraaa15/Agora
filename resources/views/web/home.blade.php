@@ -1,16 +1,5 @@
 @extends('layout.app')
 @section('content')
-
-<div class="flex flex-row">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-
-</div>
-
-
 <div class="w-full ">
     <div class="relative">
         <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
