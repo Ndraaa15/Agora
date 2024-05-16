@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->date('date');
             $table->time('time');
-            $table->string('location_map');
+            $table->longText('location_map');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });

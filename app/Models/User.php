@@ -44,4 +44,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Wishlist::class, 'user_id', 'id');
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'user_id', 'id');
+    }
 }
