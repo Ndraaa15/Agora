@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Event;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,61 +20,24 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    private function getUpcomingEvents(): array
+    private function getUpcomingEvents()
     {
-        return [
-            [
-                'image' => 'assets/images/upcoming-event-1.jpg',
-                'name' => 'Tari Pendet',
-                'price' => 'IDR 100.000',
-                'province' => 'Jakarta',
-                'city' => 'Jakarta Pusat',
-            ],
-            [
-                'image' => 'assets/images/upcoming-event-1.jpg',
-                'name' => 'Tari Pendet',
-                'price' => 'IDR 100.000',
-                'province' => 'Jakarta',
-                'city' => 'Jakarta Pusat',
-            ],
-            [
-                'image' => 'assets/images/upcoming-event-1.jpg',
-                'name' => 'Tari Pendet',
-                'price' => 'IDR 100.000',
-                'province' => 'Jakarta',
-                'city' => 'Jakarta Pusat',
-            ],
-        ];
+        if(Schema::hasTable('events')){
+            $events = Event::where(DB::raw("CONCAT(start_date, ' ', time)"), '>', Carbon::now())
+            ->orderBy('start_date', 'asc')
+            ->orderBy('time', 'asc')
+            ->get();
+
+            return $events;
+        }
+        return [];
     }
 
-    public function getCategories(): array{
-        return [
-            [
-                'name' => 'Music',
-                'image' => 'assets/images/music.jpg',
-            ],
-            [
-                'name' => 'Dance',
-                'image' => 'assets/images/dance.jpg',
-            ],
-            [
-                'name' => 'Theatre',
-                'image' => 'assets/images/theatre.jpg',
-            ],
-            [
-                'name' => 'Philology',
-                'image' => 'assets/images/philology.jpg',
-            ],
-            [
-                'name' => 'Art',
-                'image' => 'assets/images/art.jpg',
-            ],
-            [
-                'name' => 'Food',
-                'image' => 'assets/images/food.jpg',
-            ],
-        ];
-
+    public function getCategories(){
+        if(Schema::hasTable('categories')){
+            return Category::get();
+        }
+        return [];
     }
     public function boot(): void
     {
