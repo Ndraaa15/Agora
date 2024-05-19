@@ -1,6 +1,6 @@
 import './bootstrap';
 
-// Quantity in checkout
+// Checkout page
 document.addEventListener('DOMContentLoaded', function() {
     const minusBtn = document.getElementById('minus-btn');
     const plusBtn = document.getElementById('plus-btn');
@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const taxElement = document.getElementById('tax');
     const totalElement = document.getElementById('total');
 
-    // Read the ticket price from the data attribute
     const ticketContainer = document.querySelector('.flex.flex-row.justify-between.items-center.mt-5');
     const ticketPrice = parseFloat(ticketContainer.getAttribute('data-ticket-price'));
     const taxPerItem = 4000;
@@ -41,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePrices();
     });
 
-    // Initial calculation to set the prices correctly on load
     updatePrices();
 });
 
