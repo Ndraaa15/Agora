@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
             return  Event::where(DB::raw("CONCAT(start_date, ' ', time)"), '>', Carbon::now())
             ->orderBy('start_date', 'asc')
             ->orderBy('time', 'asc')
-            ->limit(4)
+            ->limit(5)
             ->get();
         }
         return [];
