@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    @include('error.error')
     @yield('content')
 </body>
 
