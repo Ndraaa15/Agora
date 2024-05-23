@@ -30,4 +30,9 @@ class Order extends Model
     {
         return $this->belongsTo(TicketSection::class, 'ticket_section_id', 'id');
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'order_id', 'id');
+    }
 }

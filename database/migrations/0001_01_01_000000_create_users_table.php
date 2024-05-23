@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
+            $table->text('profile_picture')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('password');
+            $table->boolean('is_admin')->default(false);
             $table->timestamps();
         });
 

@@ -8,7 +8,10 @@ use App\Http\Controllers\OrderController;
 Route::prefix('/')->group(function () {
     Route::view('', 'web.home')->name('home');
     Route::view('faq', 'web.static.faq')->name('faq');
+<<<<<<< HEAD
     Route::view('about', 'web.static.about')->name('about');
+=======
+>>>>>>> 457936bb01ef1a5ffc0974eac93857a08ce490b3
 });
 
 Route::prefix('auth')->group(function () {
@@ -26,4 +29,9 @@ Route::prefix('events')->group(function () {
 
 Route::prefix('checkout')->group(function () {
     Route::get('/{ticket_section_id}', [OrderController::class, 'index'])->name('checkout');
+<<<<<<< HEAD
 });
+=======
+});
+
+>>>>>>> 457936bb01ef1a5ffc0974eac93857a08ce490b3

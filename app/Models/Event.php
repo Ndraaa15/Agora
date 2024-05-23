@@ -18,7 +18,7 @@ class Event extends Model
         'province',
         'city',
         'description',
-        'image',
+        'images',
         'start_date',
         'end_date',
         'date',

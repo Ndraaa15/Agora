@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('assets/icons/logo.png') }}" type="image/x-icon">
     <meta name="description" content="A place to gather symphony">
     <link rel="icon" href="">
     @vite(['./resources/css/app.css', './resources/js/app.js'])
@@ -15,6 +16,7 @@
 </head>
 
 <body>
+    @include('error.error')
     @include('partial.header')
     @yield('content')
     @include('partial.footer')
