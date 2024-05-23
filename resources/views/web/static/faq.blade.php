@@ -6,7 +6,7 @@
 <div class="bg-gray-100 flex items-center justify-center min-h-screen py-20">
     <div class="w-full max-w-2xl p-5 bg-white rounded-lg shadow-lg">
         <h2 class="text-2xl font-bold mb-4 text-center">Frequently Asked Questions</h2>
-        <p class="text-gray-500 mb-6 justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod, odio eget tincidunt molestie.</p>
+        <p class="text-gray-500 mb-6 justify">Beberapa pertanyaan yang sering ditanyakan. Jika tetap memiliki pertanyaan, segera hubungi kami!</p>
         <div class="space-y-4 text-justify">
             <div class="border border-gray-200 rounded-md">
                 <button class="w-full flex justify-between items-center p-4 text-left text-gray-700 hover:bg-gray-100 focus:outline-none">
@@ -27,7 +27,7 @@
                     </svg>
                 </button>
                 <div class="px-4 pb-4 hidden">
-                    <p class="text-gray-500">Hai kak Selamat pagi/siang/sore/malam, Untuk pembelian Tiket event bisa langsung ke website Agora lalu pilih event dan kategori tiket yang dikehedaki, atau bisa juga cari eventnya di fitur "kolom pencarian tiket".</p>
+                    <p class="text-gray-500">Hai kak Selamat pagi/siang/sore/malam! Untuk pembelian Tiket event bisa langsung ke website Agora lalu pilih event dan kategori tiket yang dikehedaki, atau bisa juga cari eventnya di fitur "kolom pencarian tiket".</p>
                 </div>
             </div>
             <div class="border border-gray-200 rounded-md">
@@ -38,7 +38,7 @@
                     </svg>
                 </button>
                 <div class="px-4 pb-4 hidden">
-                    <p class="text-gray-500">Hai kak Selamat pagi/siang/sore/malam, alat bayar yang bisa digunakan untuk membeli tiket bisa menggunakan Bank Transfer (BCA/Mandiri/BNI/BRI), Bank Virtual Account (Bank VA), Kartu Kredit & Debit, Link Aja, Ovo, Qris (Gopay, Dana, dll).</p>
+                    <p class="text-gray-500">Hai kak Selamat pagi/siang/sore/malam. Alat bayar yang bisa digunakan untuk membeli tiket bisa menggunakan Bank Transfer (BCA/Mandiri/BNI/BRI), Bank Virtual Account (Bank VA), Kartu Kredit & Debit, Link Aja, Ovo, Qris (Gopay, Dana, dll).</p>
                 </div>
             </div>
             <div class="border border-gray-200 rounded-md">

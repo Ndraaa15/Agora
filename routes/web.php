@@ -26,3 +26,4 @@ Route::prefix('events')->group(function () {
 Route::prefix('checkout')->group(function () {
     Route::get('/{ticket_section_id}', [OrderController::class, 'index'])->name('checkout');
 });
+
