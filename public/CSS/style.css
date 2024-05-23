@@ -1,0 +1,151 @@
+nav{
+    padding-top: 25px!important;
+    padding-bottom: 25px!important;
+}
+
+.navbar-brand{
+    color: #FFFFFF!important;
+    font-size: 32px;
+    line-height: 22px;
+    font-weight: 700;
+    font-family: 'Inter';
+}
+
+.nav-item{
+    font-family: 'Inter';
+    color: #FFFFFF!important;
+    font-weight: 400;
+    font-size: 16px;
+
+}
+
+.jumbotron{
+    background-color: #FFFFFF;
+}
+
+.display-4{
+    font-family: 'Inter';
+    color: #279EFF;
+    font-weight: 600;
+    font-size: 60px;
+    text-align: center;
+}
+
+
+.cloud1, .cloud2 {
+    position: absolute;
+    top: 1;
+    z-index: 1.5;
+}
+
+.cloud1 {
+    left: 0; 
+}
+
+.cloud2 {
+    right: 0;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+h1 {
+    font-family: 'Inter';
+    font-size: 36px;
+    font-weight: 600;
+    color: #0C356A;
+    line-height: 40px;
+    padding-bottom: 10px;
+}
+
+p {
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 36px;
+}
+
+.about-buttons {
+    margin-top: 20px;
+}
+
+.about-buttons .btn {
+    font-family: 'Inter';
+    margin-right: 10px;
+    border: 2px solid #6D758F;
+    color: #0d6efd;
+    border-radius: 20px;
+}
+
+.about-buttons .btn:hover {
+    font-family: 'Inter';
+    margin-right: 10px;
+    border: 2px solid #0d6efd;
+    color: #FFFFFF;
+    border-radius: 20px;
+}
+
+.position-relative {
+    position: relative;
+    height: 400px; 
+}
+
+.img1 {
+    top: 20px;
+    left: 50px;
+    width: 200px;
+    z-index: 1;
+}
+
+.img2 {
+    top: 70px;
+    left: 300px;
+    width: 200px;
+    z-index: 2;
+}
+
+.img3 {
+    top: 140px;
+    left: 120px;
+    width: 200px;
+    z-index: 3;
+}
+
+.vision-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.vision-icon {
+    width:65px;
+    height:65px;
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #333;
+}
+
+.imgsponsopr{
+    padding-left: 30px;
+}
+
+#partnership{
+    margin-bottom: 80px;
+}
+
+hr{
+    border: 1px solid #E1E4ED;
+}
