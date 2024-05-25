@@ -13,10 +13,10 @@ class HandlercrudController extends Controller
     {
     	// mengambil data dari table mahasiswa
     	// $mahasiswa = DB::table('mahasiswa')->get();
-		$crud = DB::table('crud')->paginate(10);
+		$events = DB::table('events')->paginate(10);
  
     	// mengirim data mahasiswa ke view index
-    	return view('web.crud.index',['crud' => $crud]);
+    	return view('web.crud.index',['events' => $events]);
  
     }
 
@@ -26,43 +26,43 @@ class HandlercrudController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'organizer' => 'required|string|max:255',
-            'category_id' => 'required|string|max:255',
-            'province' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'description' => 'required|string',
-            'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
-            'location_map' => 'required|string|max:255',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'organizer' => 'required|string|max:255',
+        'category_id' => 'required|integer', // Assuming this is a foreign key referring to a bigint column
+        'province' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'description' => 'required|string',
+        'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'start_date' => 'required|date',
+        'end_date' => 'required|date',
+        'date' => 'required|date',
+        'time' => 'required|date_format:H:i',
+        'location_map' => 'required|string|max:255',
+    ]);
 
-        $imageName = time().'.'.$request->images->extension();  
-        $request->images->move(public_path('images'), $imageName);
+    $imageName = time().'.'.$request->images->extension();  
+    $request->images->move(public_path('images'), $imageName);
 
-        DB::table('crud')->insert([
-			'name' => $request->name,
-            'organizer' => $request->organizer,
-            'category_id' => $request->category_id,
-            'province' => $request->province,
-            'city' => $request->city,
-            'description' => $request->description,
-            'images' => $imageName,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'date' => $request->date,
-            'time' => $request->time,
-            'location_map' => $request->location_map,
-        ]);
-            
+    DB::table('crud')->insert([
+        'name' => $request->name,
+        'organizer' => $request->organizer,
+        'category_id' => (int)$request->category_id, // Ensure it is cast to integer
+        'province' => $request->province,
+        'city' => $request->city,
+        'description' => $request->description,
+        'images' => $imageName, // This will be stored as a string in a longtext column
+        'start_date' => $request->start_date,
+        'end_date' => $request->end_date,
+        'date' => $request->date,
+        'time' => $request->time,
+        'location_map' => $request->location_map,
+    ]);
 
-        return redirect()->route('crud.index')->with('success', 'Event created successfully.');
-    }
+    return redirect()->route('crud.index')->with('success', 'Event created successfully.');
+}
+
     public function edit($id)
 {
     // Retrieve the record based on the given ID
@@ -125,13 +125,13 @@ public function delete($id)
 
     try {
         // Hapus data dengan ID tertentu
-        DB::table('crud')->where('id', $id)->delete();
+        DB::table('events')->where('id', $id)->delete();
 
         // Ambil semua data yang memiliki ID lebih besar dari ID yang dihapus dan kurangi ID mereka dengan 1
-        $rows = DB::table('crud')->where('id', '>', $id)->orderBy('id')->get();
+        $rows = DB::table('events')->where('id', '>', $id)->orderBy('id')->get();
 
         foreach ($rows as $row) {
-            DB::table('crud')->where('id', $row->id)->update(['id' => $row->id - 1]);
+            DB::table('events')->where('id', $row->id)->update(['id' => $row->id - 1]);
         }
 
         // Commit transaksi

@@ -28,25 +28,25 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($crud as $cr)
+        @foreach($events as $e)
             <tr>
                 <td class="p-3 border border-gray-300 text-center">{{ $loop->iteration }}</td>
-                <td class="p-3 border border-gray-300 text-center">{{ $cr->name }}</td>
-                <td class="p-3 border border-gray-300 text-center">{{ $cr->organizer }}</td>
-                <td class="p-3 border border-gray-300 text-center">{{ $cr->category_id }}</td>
-                <td class="p-3 border border-gray-300 text-center">{{ $cr->city }}</td>
-                <td class="p-3 border border-gray-300 text-center"><img src="{{ asset('images/' . $cr->images) }}" width="35" height="40" class="mx-auto"></td>
-                <td class="p-3 border border-gray-300 text-center">{{ $cr->date }}</td>
-                <td class="p-3 border border-gray-300 text-center">{{ $cr->time }}</td>
-                <td class="p-3 border border-gray-300 text-center">{{ $cr->location_map }}</td>
+                <td class="p-3 border border-gray-300 text-center">{{ $e->name }}</td>
+                <td class="p-3 border border-gray-300 text-center">{{ $e->organizer }}</td>
+                <td class="p-3 border border-gray-300 text-center">{{ $e->category_id }}</td>
+                <td class="p-3 border border-gray-300 text-center">{{ $e->city }}</td>
+                <td class="p-3 border border-gray-300 text-center"><img src="{{ asset('assets/images/' . $e->images) }}" width="35" height="40" class="mx-auto"></td>
+                <td class="p-3 border border-gray-300 text-center">{{ $e->date }}</td>
+                <td class="p-3 border border-gray-300 text-center">{{ $e->time }}</td>
+                <td class="p-3 border border-gray-300 text-center">{{ $e->location_map }}</td>
                 <td class="p-3 border border-gray-300 text-center space-x-2">
-                    <form action="{{ route('crud.edit', $cr->id) }}" method="GET" class="inline-block">
+                    <form action="{{ route('crud.edit', $e->id) }}" method="GET" class="inline-block">
                         <button class="p-2 bg-blue-500 text-white rounded">Edit</button>
                     </form>
-                    <form action="{{ route('crud.show', $cr->id) }}" method="GET" class="inline-block">
+                    <form action="{{ route('crud.show', $e->id) }}" method="GET" class="inline-block">
                         <button class="p-2 bg-green-500 text-white rounded">Show</button>
                     </form>
-                    <form action="{{ route('crud.delete', $cr->id) }}" method="GET" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                    <form action="{{ route('crud.delete', $e->id) }}" method="GET" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this event?');">
                         @csrf
                         <button class="p-2 bg-red-500 text-white rounded">Delete</button>
                     </form>

@@ -7,8 +7,6 @@
     <div class="w-full max-w-2xl p-5 bg-white rounded-lg shadow-lg">
         <h2 class="text-2xl font-bold mb-4 text-center">Frequently Asked Questions</h2>
 
-        <p class="text-gray-500 mb-6 justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod, odio eget tincidunt molestie.</p>
-
         <p class="text-gray-500 mb-6 justify">Beberapa pertanyaan yang sering ditanyakan. Jika tetap memiliki pertanyaan, segera hubungi kami!</p>
 
         <div class="space-y-4 text-justify">
