@@ -9,24 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    
     public function up(): void
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('crud', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('organizer');
-            $table->unsignedBigInteger('category_id');
+            $table->string('category_id');
             $table->string('province');
             $table->string('city');
             $table->text('description');
-            $table->json('images');
+            $table->string('images');
             $table->date('start_date');
             $table->date('end_date');
             $table->date('date');
             $table->time('time');
-            $table->longText('location_map');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->string('location_map');
             $table->timestamps();
         });
     }
@@ -36,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('crud');
     }
 };
