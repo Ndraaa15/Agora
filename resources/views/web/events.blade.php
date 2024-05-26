@@ -5,13 +5,25 @@
         <div class="flex flex-row gap-0">
             <div class="flex flex-row relative items-center w-full">
                 <img src="{{ asset('assets/icons/search-events.png') }}" alt="Search Events" class="absolute w-6 h-6 left-3">
-                <input placeholder="What are you looking for..." type="text" name="search" id="search" class="pl-10 outline-none border border-blue-400 w-full py-2 pr-8 rounded-md rounded-br-none rounded-tr-none">
+                <input id="search-input" placeholder="What are you looking for..." type="text" name="search" id="search" class="pl-10 outline-none border border-blue-400 w-full py-2 pr-8 rounded-md rounded-br-none rounded-tr-none">
             </div>
             <button class="py-2 px-6 bg-blue-400 rounded-md rounded-bl-none rounded-tl-none text-white font-medium">Search</button>
+            <script>
+                function searchEvent() {
+                    let inputVal = document.getElementById('search-input').value;
+                    window.location.href = '/events?search=' + inputVal;
+                }
+
+                function handleKeyPress(event) {
+                    if (event.keyCode === 13) {
+                        searchEvent();
+                    }
+                }
+            </script>
         </div>
         <div class="flex flex-row mt-10 gap-10">
             @foreach ($categories as $category )
-            <button class="px-6 py-2 rounded-3xl border-2 border-blue-400 text-gray-600 hover:bg-blue-400 hover:text-white bg-white">{{ $category->name }}</button>
+            <a href="{{ route('events', ['category_id' => $category->id ])}}" class="px-6 py-2 rounded-3xl border-2 border-blue-400 text-gray-600 hover:bg-blue-400 hover:text-white bg-white">{{ $category->name }}</a>
             @endforeach
         </div>
     </div>

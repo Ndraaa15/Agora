@@ -20,7 +20,12 @@ class AuthController extends Controller
 
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
-                return redirect()->route('home');
+
+                if (Auth::user()->is_admin) {
+                    return redirect()->route('admin-event');
+                } else {
+                    return redirect()->route('home');
+                }
             }
         } catch (\Exception $e) {
             return back()->withErrors([

@@ -5,156 +5,158 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-
+use App\Models\Event;
+use App\ThirdParty\CloudinaryLib;
 
 class EventController extends Controller
 {
     public function index()
     {
-        // mengambil data dari table mahasiswa
-        // $mahasiswa = DB::table('mahasiswa')->get();
-        $crud = DB::table('crud')->paginate(10);
-
-        // mengirim data mahasiswa ke view index
-        return view('web.crud.index', ['crud' => $crud]);
+        try {
+            $events = Event::paginate(10)->load('category');
+            return view('web.admin.event.index', compact('events'));
+        } catch (\Exception $e) {
+            return redirect()->route('admin-event')->withErrors('error', $e->getMessage());
+        }
     }
 
     public function create()
     {
-        return view('web.crud.create');
+        return view('web.admin.event.create');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'organizer' => 'required|string|max:255',
-            'category_id' => 'required|string|max:255',
-            'province' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'description' => 'required|string',
-            'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
-            'location_map' => 'required|string|max:255',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'organizer' => 'required|string|max:255',
+                'category_id' => 'required|string|max:255',
+                'province' => 'required|string|max:255',
+                'city' => 'required|string|max:255',
+                'description' => 'required|string',
+                'images.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'start_date' => 'required|date',
+                'end_date' => 'required|date',
+                'date' => 'required|date',
+                'time' => 'required|date_format:H:i',
+                'location_map' => 'required|string|max:255',
+            ]);
 
-        $imageName = time() . '.' . $request->images->extension();
-        $request->images->move(public_path('images'), $imageName);
+            $imagesUrl = [];
+            $cloudinary = new CloudinaryLib();
 
-        DB::table('crud')->insert([
-            'name' => $request->name,
-            'organizer' => $request->organizer,
-            'category_id' => $request->category_id,
-            'province' => $request->province,
-            'city' => $request->city,
-            'description' => $request->description,
-            'images' => $imageName,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'date' => $request->date,
-            'time' => $request->time,
-            'location_map' => $request->location_map,
-        ]);
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $result = $cloudinary->upload($image->getRealPath());
+                    $imagesUrl[] = $result;
+                }
+            }
 
+            Event::create([
+                'name' => $request->name,
+                'organizer' => $request->organizer,
+                'category_id' => $request->category_id,
+                'province' => $request->province,
+                'city' => $request->city,
+                'description' => $request->description,
+                'images' => $imagesUrl,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'date' => $request->date,
+                'time' => $request->time,
+                'location_map' => $request->location_map,
+            ]);
 
-        return redirect()->route('crud.index')->with('success', 'Event created successfully.');
+            return redirect()->route('admin-event')->with('success', 'Event created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin-event')->withErrors(['error' => $e->getMessage()]);
+        }
     }
+
     public function edit($id)
     {
-        // Retrieve the record based on the given ID
-        $crud = DB::table('crud')->where('id', $id)->first();
+        try {
+            $event = Event::find($id);
 
-        // Check if the record exists
-        if (!$crud) {
-            return redirect()->route('crud.index')->with('error', 'Record not found');
+            if (!$event) {
+                return redirect()->route('admin-event')->withErrors('error', 'Record not found');
+            }
+
+            return view('web.admin.event.edit', compact('event'));
+        } catch (\Exception $e) {
+            return redirect()->route('admin-event')->withErrors('error', $e->getMessage());
         }
-
-        // Send the retrieved data to the edit view
-        return view('web.crud.edit', ['crud' => $crud]);
     }
 
-    public function editsave(Request $request)
+    public function editsave(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'organizer' => 'required|string|max:255',
-            'category_id' => 'required|string|max:255',
-            'province' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'description' => 'required|string',
-            'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
-            'location_map' => 'required|string|max:255',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'organizer' => 'required|string|max:255',
+                'category_id' => 'required|string|max:255',
+                'province' => 'required|string|max:255',
+                'city' => 'required|string|max:255',
+                'description' => 'required|string',
+                'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+                'start_date' => 'date',
+                'end_date' => 'date',
+                'date' => 'date',
+                'time' => 'required|date_format:H:i',
+                'location_map' => 'required|string|max:255',
+            ]);
 
-        $imageName = time() . '.' . $request->images->extension();
-        $request->images->move(public_path('images'), $imageName);
+            $imagesUrl = [];
+            $cloudinary = new CloudinaryLib();
 
-        DB::table('crud')->where('id', $request->id)->update([
-            'name' => $request->name,
-            'organizer' => $request->organizer,
-            'category_id' => $request->category_id,
-            'province' => $request->province,
-            'city' => $request->city,
-            'description' => $request->description,
-            'images' => $imageName,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'date' => $request->date,
-            'time' => $request->time,
-            'location_map' => $request->location_map,
-        ]);
-
-
-        return redirect()->route('crud.index')->with('success', 'Event created successfully.');
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $result = $cloudinary->upload($image->getRealPath());
+                    $imagesUrl[] = $result;
+                }
+            }
+            $event = Event::find($id);
+            $event->update([
+                'name' => $request->name,
+                'organizer' => $request->organizer,
+                'category_id' => $request->category_id,
+                'province' => $request->province,
+                'city' => $request->city,
+                'description' => $request->description,
+                // 'images' => $imagesUrl,
+                // 'start_date' => $request->start_date,
+                // 'end_date' => $request->end_date,
+                // 'date' => $request->date,
+                'time' => $request->time,
+                'location_map' => $request->location_map,
+            ]);
+            return redirect()->route('admin-event');
+        } catch (\Exception $e) {
+            return redirect()->route('admin-event')->withErrors('error', $e->getMessage());
+        }
     }
-
-
 
     public function delete($id)
     {
-        // Mulai transaksi
-        DB::beginTransaction();
-
         try {
-            // Hapus data dengan ID tertentu
-            DB::table('crud')->where('id', $id)->delete();
-
-            // Ambil semua data yang memiliki ID lebih besar dari ID yang dihapus dan kurangi ID mereka dengan 1
-            $rows = DB::table('crud')->where('id', '>', $id)->orderBy('id')->get();
-
-            foreach ($rows as $row) {
-                DB::table('crud')->where('id', $row->id)->update(['id' => $row->id - 1]);
-            }
-
-            // Commit transaksi
-            DB::commit();
-
-            return redirect()->route('crud.index')->with('success', 'Event deleted and IDs adjusted successfully.');
+            Event::where('id', $id)->delete();
+            return redirect()->route('admin-event');
         } catch (\Exception $e) {
-            // Rollback transaksi jika ada kesalahan
-            DB::rollBack();
-
-            return redirect()->route('crud.index')->with('error', 'An error occurred: ' . $e->getMessage());
+            return redirect()->route('admin-event')->withErrors('error', $e->getMessage());
         }
     }
 
     public function show($id)
     {
-        // Mengambil data event berdasarkan ID
-        $crud = DB::table('crud')->where('id', $id)->first();
-
-        // Memeriksa apakah data event ditemukan
-        if (!$crud) {
-            return redirect()->route('crud.index')->with('status', 'not_found');
+        try {
+            $event = Event::find($id);
+            if (!$event) {
+                return redirect()->route('admin-event')->withErrors('error', 'not_found');
+            }
+            return view('web.admin.event.show', compact('event'));
+        } catch (\Exception $e) {
+            return redirect()->route('admin-event')->withErrors('error', $e->getMessage());
         }
-
-        return view('web.crud.show', compact('crud'));
     }
 }

@@ -51,11 +51,11 @@ Route::prefix('wishlist')->group(function () {
 });
 
 Route::prefix('admin')->group(function(){
-    Route::get('event/event', [Admin\EventController::class, 'index'])->name('crud.index');
-    Route::get('event/create', [Admin\EventController::class, 'create'])->name('crud.create');
-    Route::post('event/create/store', [Admin\EventController::class, 'store'])->name('crud.store');
-    Route::get('event/edit/{id}', [Admin\EventController::class, 'edit'])->name('crud.edit');
-    Route::post('event/edit/editsave/{id}', [Admin\EventController::class, 'editsave'])->name('crud.update');
-    Route::get('event/delete/{id}', [Admin\EventController::class, 'delete'])->name('crud.delete');
-    Route::get('event/show/{id}', [Admin\EventController::class, 'show'])->name('crud.show');
+    Route::get('event/', [Admin\EventController::class, 'index'])->name('admin-event');
+    Route::get('event/create', [Admin\EventController::class, 'create'])->name('admin-event-create');
+    Route::post('event/store', [Admin\EventController::class, 'store'])->name('admin-event-store');
+    Route::get('event/edit/{id}', [Admin\EventController::class, 'edit'])->name('admin-event-edit');
+    Route::post('event/editsave/{id}', [Admin\EventController::class, 'editsave'])->name('admin-event-editsave');
+    Route::get('event/delete/{id}', [Admin\EventController::class, 'delete'])->name('admin-event-delete');
+    Route::get('event/show/{id}', [Admin\EventController::class, 'show'])->name('admin-event-show');
 });
