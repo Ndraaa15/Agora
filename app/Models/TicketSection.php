@@ -21,4 +21,14 @@ class TicketSection extends Model
     {
         return $this->belongsTo(Event::class, 'event_id', 'id');
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'ticket_section_id', 'id');
+    }
+
+    public function getPriceAttribute($value)
+    {
+        return number_format($value, 2);
+    }
 }

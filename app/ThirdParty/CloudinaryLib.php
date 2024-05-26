@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib;
+namespace App\ThirdParty;
 
 use Cloudinary\Api\Upload\UploadApi;
 use Cloudinary\Configuration\Configuration;

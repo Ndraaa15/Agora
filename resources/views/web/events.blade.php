@@ -17,14 +17,16 @@
     </div>
     <div class="grid grid-cols-4 gap-6 px-4 mb-40">
         @foreach($events as $event)
-        <div class="px-5 py-2 pb-10 shadow-lg rounded-md bg-white">
-            <img src="{{ asset( $event->images[0] ) }}" alt="" class="rounded-md">
-            <div class="flex flex-row justify-between mt-5 items-center">
-                <h1 class="text-xl font-bold">{{$event->name}}</h1>
-                <p class="text-sm text-gray-400">{{ $event->date }}</p>
+        <a href="{{ route('event', ['event_id' => $event->id]) }}">
+            <div class="px-5 py-2 pb-10 shadow-lg rounded-md bg-white">
+                <img src="{{ asset( $event->images[0] ) }}" alt="" class="rounded-md">
+                <div class="flex flex-row justify-between mt-5 items-center">
+                    <h1 class="text-xl font-bold">{{$event->name}}</h1>
+                    <p class="text-sm text-gray-400">{{ $event->date }}</p>
+                </div>
+                <p class="text-sm text-gray-400 mt-2 mb-3">{{ $event->city }}, {{ $event->province }}</p>
             </div>
-            <p class="text-sm text-gray-400 mt-2 mb-3">{{ $event->city }}, {{ $event->province }}</p>
-        </div>
+        </a>
         @endforeach
     </div>
 </div>

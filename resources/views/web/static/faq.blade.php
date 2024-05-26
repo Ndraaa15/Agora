@@ -46,7 +46,7 @@
                 <div class="px-4 pb-4 hidden">
 
                     <p class="text-gray-500">Hai kak Selamat pagi/siang/sore/malam, alat bayar yang bisa digunakan untuk membeli tiket bisa menggunakan Bank Transfer (BCA/Mandiri/BNI/BRI), Bank Virtual Account (Bank VA), Kartu Kredit & Debit, Link Aja, Ovo, Qris (Gopay, Dana, dll).</p>
-=======
+                    =======
                     <p class="text-gray-500">Hai kak Selamat pagi/siang/sore/malam. Alat bayar yang bisa digunakan untuk membeli tiket bisa menggunakan Bank Transfer (BCA/Mandiri/BNI/BRI), Bank Virtual Account (Bank VA), Kartu Kredit & Debit, Link Aja, Ovo, Qris (Gopay, Dana, dll).</p>
 
                 </div>
@@ -85,4 +85,3 @@
     });
 </script>
 @endsection
-

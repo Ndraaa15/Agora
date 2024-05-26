@@ -26,7 +26,8 @@ class Event extends Model
         'location_map'
     ];
 
-    protected function casts(): array{
+    protected function casts(): array
+    {
         return [
             'images' => 'array',
             'start_date' => 'date',
@@ -50,26 +51,26 @@ class Event extends Model
         return $this->hasMany(Wishlist::class, 'event_id', 'id');
     }
 
-        // Accessor for start_date
-        public function getStartDateAttribute($value)
-        {
-            return Carbon::parse($value)->translatedFormat('d F Y');
-        }
 
-        // Accessor for end_date
-        public function getEndDateAttribute($value)
-        {
-            return Carbon::parse($value)->translatedFormat('d F Y');
-        }
+    public function getStartDateAttribute($value)
+    {
+        return Carbon::parse($value)->translatedFormat('d F Y');
+    }
 
-        // Accessor for date
-        public function getDateAttribute($value)
-        {
-            return Carbon::parse($value)->translatedFormat('d F Y');
-        }
 
-        public function getTimeAttribute($value)
-        {
-            return Carbon::createFromFormat('H:i:s', $value)->format('H:i');
-        }
+    public function getEndDateAttribute($value)
+    {
+        return Carbon::parse($value)->translatedFormat('d F Y');
+    }
+
+    // Accessor for date
+    public function getDateAttribute($value)
+    {
+        return Carbon::parse($value)->translatedFormat('d F Y');
+    }
+
+    public function getTimeAttribute($value)
+    {
+        return Carbon::createFromFormat('H:i:s', $value)->format('H:i');
+    }
 }

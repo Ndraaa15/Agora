@@ -26,4 +26,9 @@ class Payment extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function getAmountAttribute($value)
+    {
+        return number_format($value, 2);
+    }
 }

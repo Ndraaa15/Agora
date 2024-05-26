@@ -1,17 +1,21 @@
-import './bootstrap';
+import "./bootstrap";
 
 // Checkout page
-document.addEventListener('DOMContentLoaded', function() {
-    const minusBtn = document.getElementById('minus-btn');
-    const plusBtn = document.getElementById('plus-btn');
-    const quantityInput = document.getElementById('quantity-input');
-    const priceElement = document.getElementById('price');
-    const subtotalElement = document.getElementById('subtotal');
-    const taxElement = document.getElementById('tax');
-    const totalElement = document.getElementById('total');
+document.addEventListener("DOMContentLoaded", function () {
+    const minusBtn = document.getElementById("minus-btn");
+    const plusBtn = document.getElementById("plus-btn");
+    const quantityInput = document.getElementById("quantity-input");
+    const priceElement = document.getElementById("price");
+    const subtotalElement = document.getElementById("subtotal");
+    const taxElement = document.getElementById("tax");
+    const totalElement = document.getElementById("total");
 
-    const ticketContainer = document.querySelector('.flex.flex-row.justify-between.items-center.mt-5');
-    const ticketPrice = parseFloat(ticketContainer.getAttribute('data-ticket-price'));
+    const ticketContainer = document.querySelector(
+        ".flex.flex-row.justify-between.items-center.mt-5"
+    );
+    const ticketPrice = parseFloat(
+        ticketContainer.getAttribute("data-ticket-price")
+    );
     const taxPerItem = 4000;
 
     function updatePrices() {
@@ -26,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         totalElement.textContent = `Rp${total}`;
     }
 
-    minusBtn.addEventListener('click', function() {
+    minusBtn.addEventListener("click", function () {
         let currentValue = parseInt(quantityInput.value);
         if (currentValue > parseInt(quantityInput.min)) {
             quantityInput.value = currentValue - 1;
@@ -34,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    plusBtn.addEventListener('click', function() {
+    plusBtn.addEventListener("click", function () {
         let currentValue = parseInt(quantityInput.value);
         quantityInput.value = currentValue + 1;
         updatePrices();
@@ -43,5 +47,23 @@ document.addEventListener('DOMContentLoaded', function() {
     updatePrices();
 });
 
+// Homepage script
+document.addEventListener("DOMContentLoaded", function () {
+    const images = [
+        'assets/images/home-1.jpg',
+        'assets/images/home-2.jpg',
+        'assets/images/home-3.jpg',
+    ];
+    let currentIndex = 0;
+
+    const imageElement = document.getElementById("slideshow-image");
+
+    function changeImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        imageElement.src = images[currentIndex];
+    }
+
+    setInterval(changeImage, 3000);
+});
 
 

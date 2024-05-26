@@ -1,8 +1,11 @@
 <?php
 
-namespace Lib;
+namespace App\ThirdParty;
 
+use App\Models\Order;
 use Midtrans\Config;
+use Midtrans\Snap;
+
 
 class MidtransLib
 {
@@ -14,19 +17,19 @@ class MidtransLib
         Config::$is3ds = true;
     }
 
-    public function chargeSnap()
+    public function chargeSnap(Order $order, $user)
     {
         $params = array(
             'transaction_details' => array(
-                'order_id' => '1',
-                'gross_amount' => 123,
+                'order_id' => $order->id,
+                'gross_amount' => $order->total_price,
             ),
             'customer_details' => array(
-                'first_name' => 'John',
-                'email' => 'ai',
+                'first_name' => $user->name,
+                'email' => $user->email,
             ),
         );
 
-        return \Midtrans\Snap::createTransaction($params)->redirect_url;
+        return Snap::createTransaction($params)->redirect_url;
     }
 }
