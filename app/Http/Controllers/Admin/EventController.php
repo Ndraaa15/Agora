@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\ThirdParty\CloudinaryLib;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -78,7 +78,6 @@ class EventController extends Controller
     {
         try {
             $event = Event::find($id);
-
             if (!$event) {
                 return redirect()->route('admin-event')->withErrors('error', 'Record not found');
             }
@@ -89,7 +88,7 @@ class EventController extends Controller
         }
     }
 
-    public function editsave(Request $request, $id)
+    public function update(Request $request, $id)
     {
         try {
             $request->validate([
@@ -104,8 +103,10 @@ class EventController extends Controller
                 'end_date' => 'date',
                 'date' => 'date',
                 'time' => 'required|date_format:H:i',
-                'location_map' => 'required|string|max:255',
+                'location_map' => 'required',
             ]);
+
+            $event = Event::findOrFail($id);
 
             $imagesUrl = [];
             $cloudinary = new CloudinaryLib();
@@ -115,8 +116,10 @@ class EventController extends Controller
                     $result = $cloudinary->upload($image->getRealPath());
                     $imagesUrl[] = $result;
                 }
+            }else{
+                $imagesUrl = $event->images;
             }
-            $event = Event::find($id);
+
             $event->update([
                 'name' => $request->name,
                 'organizer' => $request->organizer,
@@ -124,16 +127,17 @@ class EventController extends Controller
                 'province' => $request->province,
                 'city' => $request->city,
                 'description' => $request->description,
-                // 'images' => $imagesUrl,
-                // 'start_date' => $request->start_date,
-                // 'end_date' => $request->end_date,
-                // 'date' => $request->date,
+                'images' => $imagesUrl,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'date' => $request->date,
                 'time' => $request->time,
                 'location_map' => $request->location_map,
             ]);
-            return redirect()->route('admin-event');
+
+            return redirect()->route('admin-event')->with('success', 'Event updated successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('admin-event')->withErrors('error', $e->getMessage());
+            return redirect()->route('admin-event')->withErrors(['error' => $e->getMessage()]);
         }
     }
 

@@ -12,10 +12,11 @@
     <meta name="description" content="A place to gather symphony">
     <link rel="icon" href="">
     @vite(['./resources/css/app.css', './resources/js/app.js'])
-    <title>Agora</title>
+    <title>Admin | Agora</title>
 </head>
 
 <body>
+    @include('error.error')
     @yield('content')
 </body>
 

@@ -39,7 +39,7 @@
         <div class="form-group mb-4">
             <label for="images" class="block">Images</label>
             <input type="file" id="images" name="images[]" class="w-full" required multiple>
-            <p class="text-red-500 text-sm mt-1">Allowed extensions: .png, .jpg, .jpeg, .gif</p>
+            <p class="text-red-500 text-sm mt-1">Allowed extensions: .png, .jpg, .jpeg</p>
         </div>
         <div class="form-group mb-4">
             <label for="start_date" class="block">Start Date</label>

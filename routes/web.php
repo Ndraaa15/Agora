@@ -55,7 +55,7 @@ Route::prefix('admin')->group(function(){
     Route::get('event/create', [Admin\EventController::class, 'create'])->name('admin-event-create');
     Route::post('event/store', [Admin\EventController::class, 'store'])->name('admin-event-store');
     Route::get('event/edit/{id}', [Admin\EventController::class, 'edit'])->name('admin-event-edit');
-    Route::post('event/editsave/{id}', [Admin\EventController::class, 'editsave'])->name('admin-event-editsave');
+    Route::post('event/update/{id}', [Admin\EventController::class, 'update'])->name('admin-event-update');
     Route::get('event/delete/{id}', [Admin\EventController::class, 'delete'])->name('admin-event-delete');
     Route::get('event/show/{id}', [Admin\EventController::class, 'show'])->name('admin-event-show');
 });
