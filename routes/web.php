@@ -33,6 +33,7 @@ Route::prefix('checkout')->group(function () {
     Route::get('/{ticket_section_id}', [OrderController::class, 'index'])->name('checkout');
 });
 
+<<<<<<< Updated upstream
 
 
 Route::get('/crud', [HandlercrudController::class, 'index'])->name('crud.index');
@@ -42,3 +43,12 @@ Route::get('/crud/edit/{id}', [HandlercrudController::class, 'edit'])->name('cru
 Route::post('/crud/edit/editsave/{id}', [HandlercrudController::class, 'editsave'])->name('crud.update');
 Route::get('/crud/delete/{id}', [HandlercrudController::class, 'delete'])->name('crud.delete');
 Route::get('/crud/show/{id}', [HandlercrudController::class, 'show'])->name('crud.show');
+=======
+Route::prefix('user')->group(function () {
+    Route::view('profile', 'web.user.profile');
+    Route::view('ticket', 'web.user.ticket');
+    Route::view('wishlist', 'web.user.wishlist');
+
+    
+});
+>>>>>>> Stashed changes
