@@ -28,7 +28,7 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($events as $e)
+        @foreach($crud as $e)
             <tr>
                 <td class="p-3 border border-gray-300 text-center">{{ $loop->iteration }}</td>
                 <td class="p-3 border border-gray-300 text-center">{{ $e->name }}</td>

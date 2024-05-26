@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\CRUD;
+use App\Models\Event;
+use App\Models\Category;
 
 
 class HandlercrudController extends Controller
@@ -13,10 +14,10 @@ class HandlercrudController extends Controller
     {
     	// mengambil data dari table mahasiswa
     	// $mahasiswa = DB::table('mahasiswa')->get();
-		$events = DB::table('events')->paginate(10);
+		$crud = DB::table('crud')->paginate(10);
  
     	// mengirim data mahasiswa ke view index
-    	return view('web.crud.index',['events' => $events]);
+    	return view('web.crud.index',['crud' => $crud]);
  
     }
 
@@ -25,79 +26,92 @@ class HandlercrudController extends Controller
         return view('web.crud.create');
     }
 
+
+    
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'organizer' => 'required|string|max:255',
-        'category_id' => 'required|integer', // Assuming this is a foreign key referring to a bigint column
-        'province' => 'required|string|max:255',
-        'city' => 'required|string|max:255',
-        'description' => 'required|string',
-        'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'start_date' => 'required|date',
-        'end_date' => 'required|date',
-        'date' => 'required|date',
-        'time' => 'required|date_format:H:i',
-        'location_map' => 'required|string|max:255',
-    ]);
-
-    $imageName = time().'.'.$request->images->extension();  
-    $request->images->move(public_path('images'), $imageName);
-
-    DB::table('crud')->insert([
-        'name' => $request->name,
-        'organizer' => $request->organizer,
-        'category_id' => (int)$request->category_id, // Ensure it is cast to integer
-        'province' => $request->province,
-        'city' => $request->city,
-        'description' => $request->description,
-        'images' => $imageName, // This will be stored as a string in a longtext column
-        'start_date' => $request->start_date,
-        'end_date' => $request->end_date,
-        'date' => $request->date,
-        'time' => $request->time,
-        'location_map' => $request->location_map,
-    ]);
-
-    return redirect()->route('crud.index')->with('success', 'Event created successfully.');
-}
+    {
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'organizer' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:categories,id', // Validasi foreign key
+            'province' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'description' => 'required|string',
+            'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'date' => 'required|date',
+            'time' => 'required|date_format:H:i',
+            'location_map' => 'required|string|max:255',
+        ]);
+    
+        try {
+            // Pindahkan gambar ke direktori publik
+            $imageName = time().'.'.$request->images->extension();  
+            $request->images->move(public_path('images'), $imageName);
+    
+            // Insert data ke dalam tabel events dengan Eloquent
+            DB::table('events')->insert([
+                'name' => $request->name,
+                'organizer' => $request->organizer,
+                'category_id' => $request->category_id, // Pastikan ini adalah integer
+                'province' => $request->province,
+                'city' => $request->city,
+                'description' => $request->description,
+                'images' => $imageName, // Simpan nama gambar sebagai string
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'date' => $request->date,
+                'time' => $request->time,
+                'location_map' => $request->location_map,
+            ]);
+    
+            return redirect()->route('crud.index')->with('success', 'Event created successfully.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return back()->with('error', 'There was a problem creating the event: '.$e->getMessage());
+        } catch (\Exception $e) {
+            return back()->with('error', 'There was a problem creating the event.');
+        }
+    }
+    
+    
 
     public function edit($id)
 {
     // Retrieve the record based on the given ID
-    $crud = DB::table('crud')->where('id', $id)->first();
+    $events = DB::table('events')->where('id', $id)->first();
     
     // Check if the record exists
-    if (!$crud) {
+    if (!$events) {
         return redirect()->route('crud.index')->with('error', 'Record not found');
     }
     
     // Send the retrieved data to the edit view
-    return view('web.crud.edit', ['crud' => $crud]);
+    return view('web.crud.edit', ['events' => $events]);
 }
 
 public function editsave(Request $request)
 {
     $request->validate([
         'name' => 'required|string|max:255',
-        'organizer' => 'required|string|max:255',
-        'category_id' => 'required|string|max:255',
-        'province' => 'required|string|max:255',
-        'city' => 'required|string|max:255',
-        'description' => 'required|string',
-        'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'start_date' => 'required|date',
-        'end_date' => 'required|date',
-        'date' => 'required|date',
-        'time' => 'required|date_format:H:i',
-        'location_map' => 'required|string|max:255',
-    ]);
+            'organizer' => 'required|string|max:255',
+            'category_id' => 'required|integer|exists:categories,id', // Validasi foreign key
+            'province' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'description' => 'required|string',
+            'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'date' => 'required|date',
+            'time' => 'required|date_format:H:i',
+            'location_map' => 'required|string|max:255',
+        ]);
 
     $imageName = time().'.'.$request->images->extension();  
     $request->images->move(public_path('images'), $imageName);
 
-    DB::table('crud')->where('id',$request->id)->update([
+    DB::table('events')->where('id',$request->id)->update([
         'name' => $request->name,
         'organizer' => $request->organizer,
         'category_id' => $request->category_id,
@@ -149,13 +163,13 @@ public function delete($id)
     public function show($id)
     {
     // Mengambil data event berdasarkan ID
-        $crud = DB::table('crud')->where('id', $id)->first();
+    $events = DB::table('events')->where('id', $id)->first();
 
     // Memeriksa apakah data event ditemukan
-        if (!$crud) {
+        if (!$events) {
             return redirect()->route('crud.index')->with('status', 'not_found');
     }
 
-    return view('web.crud.show', compact('crud'));
+    return view('web.crud.show', compact('events'));
     }
 }
