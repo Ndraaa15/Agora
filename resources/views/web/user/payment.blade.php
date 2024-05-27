@@ -6,7 +6,7 @@
         @include('partial.user.menu')
         <div class="xl:w-8/12 ml-5">
             <div class="min-h-screen flex flex-col bg-white shadow-md rounded-lg mx-6 my-2 p-6 mb-6 gap-5">
-                <h1 class="text-3xl text-left font-bold my-2 ">My Ticket</h1>
+                <h1 class="text-3xl text-left font-bold my-2 ">My Payment</h1>
                 @foreach ($payments as $payment )
                 <div class="w-full shadow-lg">
                     <div class="bg-white shadow-md rounded-md p-6">

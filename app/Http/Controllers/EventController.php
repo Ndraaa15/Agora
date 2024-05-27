@@ -12,18 +12,19 @@ class EventController extends Controller
     public function index(Request $request)
     {
         try {
-            $events = Event::All();
+            $events = Event::query(); // Start with a query builder instance
 
             if ($request->query('search')) {
                 $search = $request->query('search');
-                $events = $events->where('name', 'like', '%' . $search . '%');
+                $events->where('name', 'like', '%' . $search . '%');
             }
 
             if ($request->query('category')) {
                 $category = $request->query('category');
-                $events = $events->where('category_id', $category);
+                $events->where('category_id', $category);
             }
 
+            $events = $events->get();
             return view('web.events', compact('events'));
         } catch (\Exception $e) {
             return back()->withErrors([

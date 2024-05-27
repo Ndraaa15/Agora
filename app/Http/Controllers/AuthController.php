@@ -17,7 +17,7 @@ class AuthController extends Controller
                 'password' => 'required|string',
             ]);
             $credentials = $request->only('email', 'password');
-
+            User::where('email', $request->email)->firstOrFail();
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
 

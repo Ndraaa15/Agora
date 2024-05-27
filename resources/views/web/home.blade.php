@@ -21,6 +21,25 @@
                 }
             }
         </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const images = [
+                    'assets/images/home-1.jpg',
+                    'assets/images/home-2.jpg',
+                    'assets/images/home-3.jpg',
+                ];
+                let currentIndex = 0;
+
+                const imageElement = document.getElementById("slideshow-image");
+
+                function changeImage() {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    imageElement.src = images[currentIndex];
+                }
+
+                setInterval(changeImage, 3000);
+            });
+        </script>
         <div>
             <img id="slideshow-image" class="w-full object-cover -z-10 min-h-screen" src="{{ asset('assets/images/home-1.jpg') }}" alt="Slideshow Image">
         </div>
@@ -31,7 +50,7 @@
         <div class="grid grid-cols-4 mt-10 gap-6">
             @foreach($upcomingEvents as $upcomingEvent)
             <a href="{{ route('event', ['event_id' => $upcomingEvent->id])}}">
-                <div class="px-5 py-2 pb-10 shadow-lg rounded-md bg-white cursor-pointer transform transition-transform duration-300 hover:scale-105">
+                <div class="px-5 py-2 pb-10 shadow-lg rounded-md bg-white h-96 cursor-pointer transform transition-transform duration-300 hover:scale-105">
                     <img src="{{ asset( $upcomingEvent->images[0] ) }}" alt="{{ $upcomingEvent->name }}" class="rounded-md">
                     <div class="flex flex-row justify-between mt-5 items-center">
                         <h1 class="text-xl font-bold">{{$upcomingEvent->name}}</h1>

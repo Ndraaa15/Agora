@@ -22,7 +22,8 @@ Route::prefix('user')->group(function () {
     Route::get('tickets', [UserController::class, 'ticket'])->name('user-ticket');
     Route::get('wishlist', [UserController::class, 'wishlist'])->name('user-wishlist');
     Route::get('payment', [UserController::class, 'payment'])->name('user-payment');
-});
+    Route::post('profile', [UserController::class, 'updateProfile'])->name('user-update-profile');
+})->middleware('auth');
 
 // Authentication routes
 Route::prefix('auth')->group(function () {
@@ -43,12 +44,12 @@ Route::prefix('events')->group(function () {
 Route::prefix('checkout')->group(function () {
     Route::post('', [OrderController::class, 'checkout'])->name('checkout-order');
     Route::get('/{ticket_section_id}', [OrderController::class, 'index'])->name('checkout');
-});
+})->middleware('auth');
 
 // Wishlist routes
 Route::prefix('wishlist')->group(function () {
     Route::post('/{event_id}', [WishlistController::class, 'addWishlist'])->name('add-wishlist');
-});
+})->middleware('auth');
 
 Route::prefix('admin')->group(function(){
     Route::get('event/', [Admin\EventController::class, 'index'])->name('admin-event');

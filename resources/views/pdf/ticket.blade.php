@@ -23,7 +23,9 @@
             <p class="text-gray-700"><strong>Order Code:</strong> {{ $data['code'] }}</p>
         </div>
         <div class="text-center mt-6">
-            <img src="{{ $data['qr_code'] }}" alt="QR Code" class="inline-block w-24 h-24">
+            <p> {{$data['qr_code']}}</p>
+            <img src="{{ $data['qr_code'] }}" alt="QR Code">
+            <img src="{{ $data['qr_code'] }}" alt="QR Code">
         </div>
     </div>
     @endforeach

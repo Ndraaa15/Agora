@@ -2,7 +2,7 @@
 @section('content')
 <div class="w-full">
     <div class="w-full mb-10">
-        <img src="{{ asset($event->images[1]) }}" alt="{{ $event->name }}" class="object-cover w-full h-[45rem]">
+        <img src="{{ asset($event->images[0]) }}" alt="{{ $event->name }}" class="object-cover w-full h-[45rem]">
     </div>
     <div class="px-60">
         <div class="flex flex-row gap-5 justify-end">

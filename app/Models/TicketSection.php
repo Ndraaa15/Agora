@@ -26,9 +26,4 @@ class TicketSection extends Model
     {
         return $this->hasMany(Order::class, 'ticket_section_id', 'id');
     }
-
-    public function getPriceAttribute($value)
-    {
-        return number_format($value, 2);
-    }
 }
