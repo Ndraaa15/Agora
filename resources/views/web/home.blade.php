@@ -50,7 +50,7 @@
             @foreach ($categories as $category)
             <a href="{{ route('events', ['category' => $category->id]) }}">
                 <div class="relative flex flex-col items-center justify-center p-5 rounded-lg bg-white">
-                    <img src="{{ asset($category->image) }}" alt="" class="w-full h-auto rounded-lg shadow-lg cursor-pointer transform transition-transform duration-300 hover:scale-110">
+                    <img src="{{ asset('storage/' . $category->image) }}" alt="" class="w-full h-auto rounded-lg shadow-lg cursor-pointer transform transition-transform duration-300 hover:scale-110">
                     <h1 class="text-2xl font-bold mt-5 text-white absolute">{{ $category->name }}</h1>
                 </div>
             </a>

@@ -15,27 +15,27 @@ class CategorySeeder extends Seeder
         $categories = [
             [
                 'name' => 'Music',
-                'image' => 'assets/images/music.jpg',
+                'image' => 'music.jpg',
             ],
             [
                 'name' => 'Dance',
-                'image' => 'assets/images/dance.jpg',
+                'image' => 'dance.jpg',
             ],
             [
                 'name' => 'Theatre',
-                'image' => 'assets/images/theatre.jpg',
+                'image' => 'theatre.jpg',
             ],
             [
                 'name' => 'Philology',
-                'image' => 'assets/images/philology.jpg',
+                'image' => 'philology.jpg',
             ],
             [
                 'name' => 'Art',
-                'image' => 'assets/images/art.jpg',
+                'image' => 'art.jpg',
             ],
             [
                 'name' => 'Food',
-                'image' => 'assets/images/food.jpg',
+                'image' => 'food.jpg',
             ],
         ];
 
