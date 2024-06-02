@@ -51,7 +51,7 @@
             @foreach($upcomingEvents as $upcomingEvent)
             <a href="{{ route('event', ['event_id' => $upcomingEvent->id])}}">
                 <div class="px-5 py-2 pb-10 shadow-lg rounded-md bg-white h-96 cursor-pointer transform transition-transform duration-300 hover:scale-105">
-                    <img src="{{ asset( $upcomingEvent->images[0] ) }}" alt="{{ $upcomingEvent->name }}" class="rounded-md">
+                    <img src="{{ asset('storage/' . $upcomingEvent->images[0] ) }}" alt="{{ $upcomingEvent->name }}" class="rounded-md">
                     <div class="flex flex-row justify-between mt-5 items-center">
                         <h1 class="text-xl font-bold">{{$upcomingEvent->name}}</h1>
                         <p class="text-sm text-gray-400">{{ $upcomingEvent->date }}</p>

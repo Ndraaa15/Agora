@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,9 +19,10 @@ class WishlistController extends Controller
             ]);
             return redirect()->route('user-wishlist');
         } catch (\Exception $e) {
-            return back()->withErrors([
-                'error' => $e->getMessage(),
-            ]);
+            if ($e->getCode() == 1062) {
+                return redirect()->back()->with('error', 'Event already added to wishlist');
+            }
+            return redirect()->back()->with('error', 'Something went wrong');
         }
     }
 }

@@ -51,7 +51,7 @@ Route::prefix('wishlist')->group(function () {
     Route::post('/{event_id}', [WishlistController::class, 'addWishlist'])->name('add-wishlist');
 })->middleware('auth');
 
-Route::prefix('admin')->group(function(){
+Route::prefix('crud')->group(function(){
     Route::get('event/', [Admin\EventController::class, 'index'])->name('admin-event');
     Route::get('event/create', [Admin\EventController::class, 'create'])->name('admin-event-create');
     Route::post('event/store', [Admin\EventController::class, 'store'])->name('admin-event-store');

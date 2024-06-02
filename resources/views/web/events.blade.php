@@ -31,7 +31,7 @@
         @foreach($events as $event)
         <a href="{{ route('event', ['event_id' => $event->id]) }}">
             <div class="px-5 py-2 pb-10 shadow-lg rounded-md bg-white h-96">
-                <img src="{{ asset( $event->images[0] ) }}" alt="" class="rounded-md h-60">
+                <img src="{{ asset('storage/' . $event->images[0] ) }}" alt="" class="rounded-md h-60">
                 <div class="flex flex-row justify-between mt-5 items-center">
                     <h1 class="text-xl font-bold">{{$event->name}}</h1>
                     <p class="text-sm text-gray-400">{{ $event->date }}</p>

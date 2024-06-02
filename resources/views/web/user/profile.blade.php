@@ -11,7 +11,7 @@
                         <img src="{{ asset('assets/images/profilebg.jpg') }}" alt="coverImage" class="w-full h-72 rounded-md">
                     </div>
                     <div class="absolute bottom-[-70px] left-[10%] transform -translate-x-1/2 border-4 border-white rounded-md">
-                        <img src="{{ asset('assets/images/pp.png') }}" alt="profilepicture" class="w-32 h-32 rounded-md">
+                        <img src="{{ $user->profile_picture }}" alt="profilepicture" class="w-32 h-32 rounded-md">
                     </div>
 
                 </div>

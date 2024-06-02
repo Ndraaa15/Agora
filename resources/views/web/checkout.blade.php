@@ -26,7 +26,7 @@
                 <h1 class="text-2xl font-bold">Order</h1>
                 <div class="border border-gray-400 mt-4 mb-4"></div>
                 <div class="flex flex-row gap-5">
-                    <img src="{{ asset( $event->images[0])}}" alt="" class="w-28 h-28 rounded-lg">
+                    <img src="{{ asset('storage/' . $event->images[0])}}" alt="" class="w-28 h-28 rounded-lg">
                     <div>
                         <h1 class="text-lg font-bold"> {{ $event->name }}</h1>
                         <p class="text-sm font-semibold">{{ $ticketSection->name }}</p>
