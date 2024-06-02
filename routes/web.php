@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,6 +23,7 @@ Route::prefix('user')->group(function () {
     Route::get('tickets', [UserController::class, 'ticket'])->name('user-ticket');
     Route::get('wishlist', [UserController::class, 'wishlist'])->name('user-wishlist');
     Route::get('payment', [UserController::class, 'payment'])->name('user-payment');
+    Route::get('ticket-detail/{order_id}', [UserController::class, 'getTicketDetails'])->name('user-ticket-detail');
     Route::post('profile', [UserController::class, 'updateProfile'])->name('user-update-profile');
 })->middleware('auth');
 
@@ -44,19 +46,9 @@ Route::prefix('events')->group(function () {
 Route::prefix('checkout')->group(function () {
     Route::post('', [OrderController::class, 'checkout'])->name('checkout-order');
     Route::get('/{ticket_section_id}', [OrderController::class, 'index'])->name('checkout');
-})->middleware('auth');
+})->middleware(AuthMiddleware::class);
 
 // Wishlist routes
 Route::prefix('wishlist')->group(function () {
     Route::post('/{event_id}', [WishlistController::class, 'addWishlist'])->name('add-wishlist');
 })->middleware('auth');
-
-Route::prefix('crud')->group(function(){
-    Route::get('event/', [Admin\EventController::class, 'index'])->name('admin-event');
-    Route::get('event/create', [Admin\EventController::class, 'create'])->name('admin-event-create');
-    Route::post('event/store', [Admin\EventController::class, 'store'])->name('admin-event-store');
-    Route::get('event/edit/{id}', [Admin\EventController::class, 'edit'])->name('admin-event-edit');
-    Route::post('event/update/{id}', [Admin\EventController::class, 'update'])->name('admin-event-update');
-    Route::get('event/delete/{id}', [Admin\EventController::class, 'delete'])->name('admin-event-delete');
-    Route::get('event/show/{id}', [Admin\EventController::class, 'show'])->name('admin-event-show');
-});

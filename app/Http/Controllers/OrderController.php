@@ -98,7 +98,6 @@ class OrderController extends Controller
             return redirect()->away($url);
         } catch (Exception $e) {
             DB::rollBack();
-            dd($e);
             return back()->withErrors([
                 'error' => $e->getMessage(),
             ]);

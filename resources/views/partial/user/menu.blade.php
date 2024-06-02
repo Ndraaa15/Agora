@@ -16,7 +16,7 @@
         </button>
         <br>
         <button class="w-full flex flex-row gap-4 hover:bg-slate-100 text-2xl text-left font-bold p-4 rounded ">
-            <img src="{{ asset('assets/icons/setting.png') }}" alt="Setting" class="w-8 h-8">
+            <img src="{{ asset('assets/icons/payment.png') }}" alt="Setting" class="w-8 h-8">
             <a class="text-2xl" href="{{ route('user-payment') }}">Payment</a>
         </button>
         <br>

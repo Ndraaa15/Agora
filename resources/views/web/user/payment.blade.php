@@ -11,7 +11,7 @@
                 <div class="w-full shadow-lg">
                     <div class="bg-white shadow-md rounded-md p-6">
                         <div class="flex flex-row">
-                            <img src="{{ asset($payment->order->ticketSection->event->images[0]) }}" class="w-24 h-24 rounded-md">
+                            <img src="{{'storage/' . asset($payment->order->ticketSection->event->images[0]) }}" class="w-24 h-24 rounded-md">
                             <div class="ml-8 flex flex-row justify-between w-full">
                                 <div>
                                     <h1 class="text-3xl font-bold">{{ $payment->order->ticketSection->event->name }}</h1>

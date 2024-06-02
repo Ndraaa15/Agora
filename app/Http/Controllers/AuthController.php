@@ -20,12 +20,11 @@ class AuthController extends Controller
             User::where('email', $request->email)->firstOrFail();
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
-
-                if (Auth::user()->is_admin) {
-                    return redirect()->route('admin-event');
-                } else {
-                    return redirect()->route('home');
-                }
+                return redirect()->route('home');
+            }else{
+                return back()->withErrors([
+                    'error' => 'The provided credentials do not match our records.',
+                ]);
             }
         } catch (\Exception $e) {
             return back()->withErrors([
