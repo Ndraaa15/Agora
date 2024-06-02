@@ -24,7 +24,7 @@ class PaymentResource extends Resource
     {
         return $form
             ->schema([
-                //
+
             ]);
     }
 
@@ -32,8 +32,8 @@ class PaymentResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')
-                    ->label('User ID')
+                TextColumn::make('user.name')
+                    ->label('User')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('order_id')
@@ -57,7 +57,7 @@ class PaymentResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

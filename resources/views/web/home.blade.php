@@ -21,25 +21,6 @@
                 }
             }
         </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const images = [
-                    'assets/images/home-1.jpg',
-                    'assets/images/home-2.jpg',
-                    'assets/images/home-3.jpg',
-                ];
-                let currentIndex = 0;
-
-                const imageElement = document.getElementById("slideshow-image");
-
-                function changeImage() {
-                    currentIndex = (currentIndex + 1) % images.length;
-                    imageElement.src = images[currentIndex];
-                }
-
-                setInterval(changeImage, 3000);
-            });
-        </script>
         <div>
             <img id="slideshow-image" class="w-full object-cover -z-10 min-h-screen" src="{{ asset('assets/images/home-1.jpg') }}" alt="Slideshow Image">
         </div>

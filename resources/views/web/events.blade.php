@@ -23,7 +23,7 @@
         </div>
         <div class="flex flex-row mt-10 gap-10">
             @foreach ($categories as $category )
-            <a href="{{ route('events', ['category_id' => $category->id ])}}" class="px-6 py-2 rounded-3xl border-2 border-blue-400 text-gray-600 hover:bg-blue-400 hover:text-white bg-white">{{ $category->name }}</a>
+            <a href="{{ route('events', ['category' => $category->id ])}}" class="px-6 py-2 rounded-3xl border-2 border-blue-400 text-gray-600 hover:bg-blue-400 hover:text-white bg-white">{{ $category->name }}</a>
             @endforeach
         </div>
     </div>

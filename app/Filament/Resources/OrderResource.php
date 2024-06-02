@@ -7,6 +7,7 @@ use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
 use Cloudinary\Transformation\Argument\Text\Text;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -14,7 +15,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
-
+use Filament\Forms\Components\TextInput;
 
 class OrderResource extends Resource
 {
@@ -26,7 +27,7 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                //
+
             ]);
     }
 
@@ -70,13 +71,12 @@ class OrderResource extends Resource
                     ->label('Total Price')
                     ->sortable()
                     ->searchable(),
-
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

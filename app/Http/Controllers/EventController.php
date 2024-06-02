@@ -12,7 +12,7 @@ class EventController extends Controller
     public function index(Request $request)
     {
         try {
-            $events = Event::query(); // Start with a query builder instance
+            $events = Event::query();
 
             if ($request->query('search')) {
                 $search = $request->query('search');

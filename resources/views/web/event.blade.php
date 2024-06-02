@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="my-20 p-5 bg-gray-100 shadow-lg flex flex-col gap-5 rounded-lg">
+        <div class="my-20 p-5 bg-gray-50 shadow-lg flex flex-col gap-5 rounded-lg">
             <h1 class="text-2xl font-bold mb-10">Choose your ticket</h1>
             @foreach ($ticketSections as $ticketSection )
             <a href="{{ route('checkout', ['ticket_section_id' => $ticketSection->id]) }}">
