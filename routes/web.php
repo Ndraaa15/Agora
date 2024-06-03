@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Middleware\AuthMiddleware;
@@ -52,3 +53,8 @@ Route::prefix('checkout')->group(function () {
 Route::prefix('wishlist')->group(function () {
     Route::post('/{event_id}', [WishlistController::class, 'addWishlist'])->name('add-wishlist');
 })->middleware('auth');
+
+// Payment routes
+Route::prefix('payment')->group(function () {
+    Route::post('/{order_id}', [PaymentController::class, 'updateStatusPayment'])->name('payment');
+})->middleware(AuthMiddleware::class);

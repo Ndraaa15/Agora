@@ -22,14 +22,12 @@
                         <ul class="list-reset leading-loose">
                             <li>
                                 <label for="profile_picture" class="text-lg text-gray-600">Profile Picture:</label>
+                                <div id="image-preview" class="w-60"></div>
                                 <input type="file" id="profile_picture" class="w-full px-10 py-2 border border-gray-300" name="profile_picture" accept="image/*">
-                                <div id="image-preview"></div>
-
                                 <script>
                                     document.getElementById('profile_picture').addEventListener('change', function(event) {
                                         var file = event.target.files[0];
                                         var reader = new FileReader();
-
                                         reader.onload = function(event) {
                                             var image = document.createElement('img');
                                             image.src = event.target.result;
@@ -37,7 +35,6 @@
                                             document.getElementById('image-preview').innerHTML = '';
                                             document.getElementById('image-preview').appendChild(image);
                                         };
-
                                         reader.readAsDataURL(file);
                                     });
                                 </script>
