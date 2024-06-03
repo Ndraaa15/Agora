@@ -43,7 +43,7 @@
                                 </script>
                             </li>
                             <li class="border-b py-4">
-                                <label for="name" class="text-lg text-gray-600">Username:</label>
+                                <label for="name" class="text-lg text-gray-600">Name:</label>
                                 <input type="text" id="name" name="name" value="{{ $user->name }}" class="text-lg float-right text-gray-700">
                             </li>
                             <li class="border-b py-4">
